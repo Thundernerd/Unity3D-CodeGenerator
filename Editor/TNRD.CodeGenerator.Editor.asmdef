@@ -1,0 +1,8 @@
+{
+    "name": "TNRD.CodeGenerator.Editor",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": []
+}

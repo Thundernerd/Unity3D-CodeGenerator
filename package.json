@@ -1,0 +1,18 @@
+{
+	"name": "net.tnrd.codegenerator",
+	"displayName":"Code Generator",
+	"version": "1.0.0",
+	"unity": "2019.1",
+	"description": "A utility to help generate code more easily.",
+	"keywords": [
+		"code",
+		"generator"
+	],
+	"author": {
+		"name": "Christiaan Bloemendaal",
+		"email": "unity3d@tnrd.net",
+		"url": "https://www.tnrd.net"
+	},
+	"dependencies": {
+	}
+}
