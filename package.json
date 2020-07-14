@@ -1,7 +1,7 @@
 {
 	"name": "net.tnrd.codegenerator",
 	"displayName":"Code Generator",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"unity": "2019.1",
 	"description": "A utility to help generate code more easily.",
 	"keywords": [
