@@ -50,7 +50,7 @@ namespace TNRD.CodeGeneration
 
         public bool Remove(string item)
         {
-            var index = IndexOf(item);
+            int index = IndexOf(item);
             if (indented.InRange(index))
                 indented.RemoveAt(index);
 

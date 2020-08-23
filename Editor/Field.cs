@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Text;
 
 namespace TNRD.CodeGeneration
 {
     public class Field : Member
     {
-        public object Value;
+        public object Value { get; set; }
 
         public Field()
         {
@@ -17,30 +18,26 @@ namespace TNRD.CodeGeneration
 
         public string Generate()
         {
-            var output = string.Empty;
+            StringBuilder builder = new StringBuilder();
 
-            output += Accessibility.ToPrintableString();
+            builder.Append(Accessibility.ToPrintableString());
 
             if (IsStatic)
-                output += " static";
+                builder.Append(" static");
 
             if (IsConst)
-                output += " const";
+                builder.Append(" const");
 
             if (IsReadOnly)
-                output += " readonly";
+                builder.Append(" readonly");
 
-            output += " " + ValueType.ToPrintableString();
+            builder.Append($" {ValueType.ToPrintableString()}");
+            builder.Append($" {Name}");
+            builder.Append(" =");
+            builder.Append($" {GetPrintableValue()}");
+            builder.Append(";");
 
-            output += " " + Name;
-
-            output += " =";
-
-            output += " " + GetPrintableValue();
-
-            output += ";";
-
-            return output;
+            return builder.ToString();
         }
 
         private string GetPrintableValue()

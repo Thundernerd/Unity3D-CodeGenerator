@@ -11,8 +11,8 @@ namespace TNRD.CodeGeneration
         private bool isReadOnly;
         private string name;
 
-        public Accessibility Accessibility;
-        public Type ValueType;
+        public Accessibility Accessibility { get; set; }
+        public Type ValueType { get; set; }
 
         public bool IsStatic
         {
@@ -58,13 +58,13 @@ namespace TNRD.CodeGeneration
 
         private string EscapeName(string input)
         {
-            var output = input;
+            string output = input;
 
             output = output.Replace(" ", string.Empty);
 
             for (int i = 0; i < INVALID_CHARS.Length; i++)
             {
-                var @char = INVALID_CHARS[i];
+                char @char = INVALID_CHARS[i];
                 output = output.Replace(@char.ToString(), "");
             }
 
