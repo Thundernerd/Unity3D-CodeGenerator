@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace TNRD.CodeGeneration
 {
     public class Class
     {
-        private string name;
+        private readonly string name;
 
         private readonly List<Type> inheritTypes = new List<Type>();
         private readonly List<Class> classes = new List<Class>();
         private readonly List<Field> fields = new List<Field>();
         private readonly List<Property> properties = new List<Property>();
 
-        public Accessibility Accessibility;
-        public bool IsPartial;
-        public bool IsStatic;
-        public bool IsAbstract;
+        public Accessibility Accessibility { get; set; }
+        public bool IsPartial { get; set; }
+        public bool IsStatic { get; set; }
+        public bool IsAbstract { get; set; }
 
         public Class(string name)
         {
@@ -45,7 +46,7 @@ namespace TNRD.CodeGeneration
 
         public string[] Generate()
         {
-            var lines = new IndentedList();
+            IndentedList lines = new IndentedList();
 
             lines.Add(GenerateStub());
 
@@ -53,7 +54,7 @@ namespace TNRD.CodeGeneration
 
             lines.AddLevel();
 
-            foreach (var @class in classes)
+            foreach (Class @class in classes)
             {
                 lines.AddRange(@class.Generate());
             }
@@ -61,7 +62,7 @@ namespace TNRD.CodeGeneration
             if (classes.Count > 0 && (fields.Count > 0 || properties.Count > 0))
                 lines.Add(string.Empty);
 
-            foreach (var field in fields)
+            foreach (Field field in fields)
             {
                 lines.Add(field.Generate());
             }
@@ -71,7 +72,7 @@ namespace TNRD.CodeGeneration
 
             for (int i = 0; i < properties.Count; i++)
             {
-                var property = properties[i];
+                Property property = properties[i];
                 lines.AddRange(property.Generate());
 
                 if (i < properties.Count - 1)
@@ -87,32 +88,32 @@ namespace TNRD.CodeGeneration
 
         private string GenerateStub()
         {
-            var name = Accessibility.ToPrintableString();
+            StringBuilder builder = new StringBuilder(Accessibility.ToPrintableString());
 
             if (IsStatic)
-                name += " static";
+                builder.Append(" static");
 
             if (IsAbstract)
-                name += " abstract";
+                builder.Append(" abstract");
 
             if (IsPartial)
-                name += " partial";
+                builder.Append(" partial");
 
-            name += string.Format(" class {0}", this.name);
+            builder.Append($" class {name}");
 
             if (inheritTypes.Count > 0)
-                name += " :";
+                builder.Append(" :");
 
             for (int i = 0; i < inheritTypes.Count; i++)
             {
-                var inheritType = inheritTypes[i];
+                Type inheritType = inheritTypes[i];
                 if (i > 0)
-                    name += ",";
+                    builder.Append(",");
 
-                name += inheritType.ToPrintableString();
+                builder.Append(inheritType.ToPrintableString());
             }
 
-            return name;
+            return builder.ToString();
         }
     }
 }

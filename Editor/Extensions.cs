@@ -10,10 +10,9 @@ namespace TNRD.CodeGeneration
             if (!type.IsGenericList())
                 return type.FullName;
 
-            var name = type.FullName;
-            name = name.Substring(0, name.IndexOf('`'));
-            var argumentType = type.GetGenericArguments()[0];
-            return string.Format("{0}<{1}>", name, argumentType.ToPrintableString());
+            string name = type.FullName.Substring(0, type.FullName.IndexOf('`'));
+            Type argumentType = type.GetGenericArguments()[0];
+            return $"{name}<{argumentType.ToPrintableString()}>";
         }
 
         public static bool IsClassOrStruct(this Type type)

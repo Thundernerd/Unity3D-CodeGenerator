@@ -47,34 +47,34 @@ namespace TNRD.CodeGeneration
 
         public string Indent(string input)
         {
-            var indentation = string.Empty;
-            var count = level * amountPerLevel;
+            string indentation = string.Empty;
+            int count = level * amountPerLevel;
 
             for (int i = 0; i < count; i++)
             {
                 indentation += character.ToString();
             }
 
-            return indentation + input;
+            return $"{indentation}{input}";
         }
 
         public string Indent(string input, params string[] args)
         {
-            var indentation = string.Empty;
-            var count = level * amountPerLevel;
+            string indentation = string.Empty;
+            int count = level * amountPerLevel;
 
             for (int i = 0; i < count; i++)
             {
                 indentation += character.ToString();
             }
 
-            return indentation + string.Format(input, args);
+            return $"{indentation}{string.Format(input, args)}";
         }
 
         public IEnumerable<string> Indent(IEnumerable<string> input)
         {
-            var indentation = string.Empty;
-            var count = level * amountPerLevel;
+            string indentation = string.Empty;
+            int count = level * amountPerLevel;
 
             for (int i = 0; i < count; i++)
             {

@@ -43,9 +43,9 @@ namespace TNRD.CodeGeneration
 
         public IEnumerable<string> Generate()
         {
-            var lines = new IndentedList();
+            IndentedList lines = new IndentedList();
 
-            foreach (var t in namespaces)
+            foreach (string t in namespaces)
             {
                 lines.Add(t);
             }
@@ -62,7 +62,7 @@ namespace TNRD.CodeGeneration
 
             for (int i = 0; i < classes.Count; i++)
             {
-                var @class = classes[i];
+                Class @class = classes[i];
 
                 lines.AddRange(@class.Generate());
             }
@@ -79,9 +79,9 @@ namespace TNRD.CodeGeneration
 
         public void SaveToFile(string path)
         {
-            var contents = Generate();
+            IEnumerable<string> contents = Generate();
 
-            var directory = Path.GetDirectoryName(path);
+            string directory = Path.GetDirectoryName(path);
             if (!Directory.Exists(directory))
                 Directory.CreateDirectory(directory);
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace TNRD.CodeGeneration
 {
@@ -11,8 +12,8 @@ namespace TNRD.CodeGeneration
 
         public Accessibility WriteAccessibility;
 
-        public bool CanRead;
-        public bool CanWrite;
+        public bool CanRead { get; set; }
+        public bool CanWrite { get; set; }
 
         public Property()
         {
@@ -54,7 +55,7 @@ namespace TNRD.CodeGeneration
 
         public IEnumerable<string> Generate()
         {
-            var lines = new IndentedList();
+            IndentedList lines = new IndentedList();
 
             lines.Add(GenerateIdentifier());
 
@@ -79,24 +80,23 @@ namespace TNRD.CodeGeneration
 
         private string GenerateIdentifier()
         {
-            var output = string.Empty;
+            StringBuilder builder = new StringBuilder();
 
-            output += Accessibility.ToPrintableString();
+            builder.Append(Accessibility.ToPrintableString());
 
             if (IsStatic)
-                output += " static";
+                builder.Append(" static");
 
             if (IsConst)
-                output += " const";
+                builder.Append(" const");
 
             if (IsReadOnly)
-                output += " readonly";
+                builder.Append(" readonly");
 
-            output += " " + ValueType.ToPrintableString();
+            builder.Append($" {ValueType.ToPrintableString()}");
+            builder.Append($" {Name}");
 
-            output += " " + Name;
-
-            return output;
+            return builder.ToString();
         }
 
         private IEnumerable<string> GenerateGetterBody()
@@ -104,9 +104,9 @@ namespace TNRD.CodeGeneration
             if (getterBody.Count == 0)
                 return new List<string> {"{ get; }"};
             if (getterBody.Count == 1)
-                return new List<string> {"get { " + getterBody.First() + " }"};
+                return new List<string> {$"get {{ {getterBody.First()} }}"};
 
-            var lines = new IndentedList();
+            IndentedList lines = new IndentedList();
 
             lines.Add("get");
             lines.Add("{");
@@ -125,7 +125,7 @@ namespace TNRD.CodeGeneration
             if (getterBody.Count == 1)
                 return new List<string> {"set { " + setterBody.First() + " }"};
 
-            var lines = new IndentedList();
+            IndentedList lines = new IndentedList();
 
             lines.Add("set");
             lines.Add("{");
