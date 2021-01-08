@@ -16,8 +16,17 @@
 
 Provides a collection of classes that will aid you with generating code.
 
-## Usage
+## Installation
+1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
+```
+openupm add net.tnrd.codegenerator
+```
 
+2. Installing through a [Unity Package](http://package-installer.glitch.me/v1/installer/package.openupm.com/net.tnrd.codegenerator?registry=https://package.openupm.com) created by the [Package Installer Creator](https://package-installer.glitch.me) from [Needle](https://needle.tools)
+
+[<img src="https://img.shields.io/badge/-Download-success?style=for-the-badge"/>](http://package-installer.glitch.me/v1/installer/package.openupm.com/net.tnrd.codegenerator?registry=https://package.openupm.com)
+
+## Usage
 _The following example is based on the package Layers & Tags Generator_
 
 ```c#
@@ -51,19 +60,8 @@ It starts with a Generator, which holds all of the items that will be generated.
 The Tags class contains some simple fields that have the name of the tag in SCREAM_CASE and are assigned the value. The type of the fields are of string and they are marked as constant for easy access.
 
 
-
-## Installation
-1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
-```
-openupm add net.tnrd.codegenerator
-```
-2. You can also install via git url by adding this entry in your **manifest.json**
-```
-"net.tnrd.codegenerator": "https://github.com/Thundernerd/Unity3D-CodeGenerator.git"
-```
-
 ## Support
-Code Generator is an open-source project that I hope helps other people. It is by no means necessary but if you feel generous you can support me by donating.
+**Code Generator** is an open-source project that I hope helps other people. It is by no means necessary but if you feel generous you can support me by donating.
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J11GEYY)
 
